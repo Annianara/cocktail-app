@@ -1,0 +1,15 @@
+.sc-ion-input-md-h {
+  --padding-start: 20px;
+  --padding-end: 20px;
+}
+
+.cocktail-img::part(image) {
+  width: 50px;
+  border-radius: 10px;
+}
+
+.cocktail-item {
+  display: flex;
+  gap: 15px;
+}
+
