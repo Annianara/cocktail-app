@@ -1,0 +1,34 @@
+.cocktail-container {
+  padding: 20px;
+}
+
+.cocktail-detail-img::part(image), .cocktail-img-img-placeholder {
+  width: 100%;
+  height: 100vw;
+  max-width: 600px;
+  max-height: 600px;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+
+.ingredients-list {
+  background: transparent;
+}
+
+.ingredients-item {
+  background: transparent;
+  --border-radius: 20px;
+  margin: 5px;
+}
+
+.section-cocktail-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-title {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}

@@ -35,3 +35,19 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+:root {
+  ///* Set the font family of the entire app */
+  --ion-font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Roboto', sans-serif;
+}
+
+ion-title {
+  text-transform: uppercase;
+  font-size: 14px;
+}
+ion-header{
+  @media (max-width: 768px) {
+    padding-top: 35px; // поддержка вырезов и status bar
+  }
+}
+

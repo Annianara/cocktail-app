@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Cocktail Searcher</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <form #searchForm="ngForm" (ngSubmit)="onSearch()">
+      <ion-input class="search-input" labelPlacement="stacked" label="Enter the name of the cocktail"
+                 placeholder="Margarita"
+                 name="search"
+                 errorText="Minimum 3 characters" minlength="3"
+                 [(ngModel)]=searchQuery>
+        <ion-button [color]="searchForm.dirty && searchForm.invalid?'danger':'success'" (click)="onSearch()"
+                    [disabled]="searchForm.invalid && searchForm.dirty"
+                    fill="clear" slot="end">
+          <ion-icon slot="icon-only" name="search-outline" aria-hidden="true"></ion-icon>
+        </ion-button>
+        <ion-button color="success" id="open-modal" fill="clear" slot="end">
+          <ion-icon slot="icon-only" name="shuffle" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-input>
+    </form>
+    @if (isReloading) {
+      <ion-progress-bar type="indeterminate"></ion-progress-bar>
+    }
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-modal trigger="open-modal">
+    <ng-template>
+      <app-cocktail-details [isRandomCocktail]="true" (cancelWasClicked)="cancel()"></app-cocktail-details>
+    </ng-template>
+  </ion-modal>
+  @if (isInitialized) {
+    <ion-list>
+      @for (cocktail of cocktails; track cocktail.id) {
+        <ion-item button>
+          <ion-label class="cocktail-item" (click)="navigate(cocktail.id)">
+            <ion-img class="cocktail-img" [src]="cocktail.imageUrl" alt=""></ion-img>
+            <div class="cocktail-description">
+              <h3 class="cocktail-name">{{ cocktail.name }}</h3>
+              <p class="cocktail-glass-type ">{{ cocktail.glassType }}</p>
+            </div>
+          </ion-label>
+        </ion-item>
+      }
+    </ion-list>
+  } @else if (isChecked) {
+    <ion-card color="light">
+      <ion-card-header>
+        <ion-card-subtitle>The search did not return any results.</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  }
+</ion-content>

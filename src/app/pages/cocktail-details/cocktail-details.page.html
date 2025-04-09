@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    @if (isRandomCocktail) {
+      <ion-buttons slot="start">
+        <ion-button (click)="cancel()">Cancel</ion-button>
+      </ion-buttons>
+    } @else {
+      <ion-buttons slot="start">
+        <ion-back-button text="Previous" icon="caret-back"></ion-back-button>
+      </ion-buttons>
+    }
+
+    <ion-title>Cocktail information</ion-title>
+    @if (isReloading) {
+      <ion-progress-bar type="indeterminate"></ion-progress-bar>
+    }
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  @if (isInitialized) {
+    <div class="cocktail-container">
+      @if (imgLoading) {
+        <ion-skeleton-text class="cocktail-img-img-placeholder" animated></ion-skeleton-text>
+      }
+      <ion-img class="cocktail-detail-img" [src]="cocktailInfo.imageUrl" (ionImgDidLoad)="imgLoading = false"></ion-img>
+      <div class="section-cocktail-name"><h1
+        class="cocktail-name"> {{ cocktailInfo.name }}</h1>
+        <ion-chip class="glass-type">
+          <ion-label>{{ cocktailInfo.glassType }}</ion-label>
+        </ion-chip>
+      </div>
+      <h2 class="section-title">Ingredients</h2>
+      <ion-list class="ingredients-list" lines="none">
+        @for (ingredient of cocktailInfo.ingredients; track ingredient) {
+          <ion-item class="ingredients-item">
+            <ion-icon name="ellipse" slot="start" size="small"></ion-icon>
+            <ion-label>{{ ingredient }}</ion-label>
+          </ion-item>
+        }
+      </ion-list>
+      <h2 class="section-title">Instructions</h2>
+      <div class="instructions-box">
+        {{ cocktailInfo.instructions }}
+      </div>
+    </div>
+  } @else if (isChecked) {
+    <ion-card color="light">
+      <ion-card-header>
+        <ion-card-subtitle>There is no data about this cocktail</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  }
+</ion-content>
